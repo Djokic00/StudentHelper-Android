@@ -1,34 +1,30 @@
 package rs.raf.projekat2.aleksa_djokic_rn1619.presentation.view.activities
 
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import rs.raf.projekat2.aleksa_djokic_rn1619.R
-import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.composable.testPractice
+import androidx.appcompat.app.AppCompatActivity
+import rs.raf.projekat2.aleksa_djokic_rn1619.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
-        // sada kada smo ubacili setContent mozemo da obrisemo setContentView
-        // ako se nalazimo u fragmentu onda ne mozemo da kazemo ovo setContent
-        setContentView(R.layout.activity_main)
-        setContent {
-            Text(text = "Hello world")
-        }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initListeners();
+    }
 
-        // Fragment - obicno zelimo da ubacimo compose code u neki xml fajl, kucamo composeView
-        setContentView(R.layout.activity_main)
-        val composeHolder = findViewById<ComposeView>(R.id.composeHolder)
-        composeHolder.setContent {
-            testPractice()
+    private fun initListeners() {
+        val sharedPreferences = getSharedPreferences(packageName, MODE_PRIVATE)
+        binding.logoutImg.setOnClickListener {
+            sharedPreferences.edit().clear().apply()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
     }
+
+
 }

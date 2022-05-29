@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">rs.raf.projekat2_aleksa_djokic_rn1619</string>
+    <string name="app_name">RAF - Student Helper</string>
     <string name="login">Login</string>
     <string name="username">Username</string>
     <string name="pin">Pin</string>
+    <string name="show_password">Show Password</string>
+    <string name="hide_password">Hide Password</string>
+
 </resources>
