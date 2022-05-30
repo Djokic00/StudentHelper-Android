@@ -5,5 +5,14 @@
     <string name="pin">Pin</string>
     <string name="show_password">Show Password</string>
     <string name="hide_password">Hide Password</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Professor/Subject</string>
+    <string name="note_search">Search by title or content</string>
+    <string-array name="group">
+        <item>Group</item>
+    </string-array>
+    <string-array name="day">
+        <item>Day</item>
+    </string-array>
 
 </resources>

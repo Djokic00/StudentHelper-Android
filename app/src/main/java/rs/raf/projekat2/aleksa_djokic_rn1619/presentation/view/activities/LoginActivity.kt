@@ -16,8 +16,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding = ActivityLoginBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
         // sada kada smo ubacili setContent mozemo da obrisemo setContentView
         // ako se nalazimo u fragmentu onda ne mozemo da kazemo ovo setContent
         setContent {

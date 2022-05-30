@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -82,6 +83,7 @@ dependencies {
     implementation "org.koin:koin-androidx-fragment:$koinVersion"
     implementation "org.koin:koin-androidx-ext:$koinVersion"
     testImplementation "org.koin:koin-test:$koinVersion"
+    // implementation "co.touchlab:koin-core:3.0.2-khan"
 
     // Retrofit
     def retrofitVersion = '2.9.0'
@@ -90,15 +92,16 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:${retrofitVersion}"
 
     // okHTTP
-//    def okHttpVersion = '4.9.0'
-//    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
-//    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
-//    implementation "com.squareup.okhttp3:okhttp-urlconnection:$okHttpVersion"
-//
-//    def roomVersion = '2.4.2'
-//    implementation "androidx.room:room-runtime:$roomVersion"
-//    kapt "androidx.room:room-compiler:$roomVersion"
-//    implementation "androidx.room:room-rxjava2:$roomVersion"
+    def okHttpVersion = '4.9.0'
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$okHttpVersion"
+
+    // Room
+    def roomVersion = '2.4.2'
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
 
     // Moshi
     def moshiVersion = '1.12.0'

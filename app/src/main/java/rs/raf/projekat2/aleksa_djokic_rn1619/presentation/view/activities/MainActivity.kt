@@ -18,6 +18,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
+        binding.scheduleImg.setOnClickListener {
+            val intent = Intent(this, ScheduleActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.noteImg.setOnClickListener {
+            val intent = Intent(this, NoteActivity::class.java)
+            startActivity(intent)
+        }
+
         val sharedPreferences = getSharedPreferences(packageName, MODE_PRIVATE)
         binding.logoutImg.setOnClickListener {
             sharedPreferences.edit().clear().apply()
