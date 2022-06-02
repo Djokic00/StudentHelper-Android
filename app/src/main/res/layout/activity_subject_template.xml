@@ -4,15 +4,15 @@
                                                    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
                                                    android:layout_height="150dp"
                                                    android:layout_marginTop="10dp"
-                                                   android:layout_marginLeft="10dp"
-                                                   android:layout_marginRight="10dp">
+                                                   android:layout_marginLeft="5dp"
+                                                   android:layout_marginRight="5dp">
 
     <TextView
             style="@style/RecyclerStyle"
             android:id="@+id/subjectTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/professorTv"
             android:textStyle="bold" app:layout_constraintStart_toStartOf="parent"/>
@@ -22,7 +22,7 @@
             android:id="@+id/professorTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintTop_toBottomOf="@id/subjectTv"
             app:layout_constraintBottom_toTopOf="@id/classroomTv"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -32,7 +32,7 @@
             android:id="@+id/classroomTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintTop_toBottomOf="@id/professorTv"
             app:layout_constraintBottom_toTopOf="@id/groupTv"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -42,7 +42,7 @@
             android:id="@+id/groupTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintTop_toBottomOf="@id/classroomTv"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -50,18 +50,21 @@
     <TextView
             android:id="@+id/dayTv"
             style="@style/RecyclerStyle"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
+            android:layout_marginTop="40dp"
             android:layout_height="30dp"
+            android:layout_width="wrap_content"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/timeTv"/>
 
     <TextView
             android:id="@+id/timeTv"
             style="@style/RecyclerStyle"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="40dp"
             android:layout_height="30dp"
+            android:layout_width="wrap_content"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
             android:text="@string/hyphen"
@@ -73,6 +76,7 @@
             app:layout_constraintStart_toEndOf="@+id/subjectTv"
             app:layout_constraintTop_toTopOf="parent"/>
     <TextView
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/typeTv"
             android:layout_marginStart="10dp"

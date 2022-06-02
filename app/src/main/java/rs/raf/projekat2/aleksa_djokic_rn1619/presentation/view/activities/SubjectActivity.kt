@@ -1,16 +1,20 @@
 package rs.raf.projekat2.aleksa_djokic_rn1619.presentation.view.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.R
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.contract.StudentContract
-import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.viewmodel.StudentViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.projekat2.aleksa_djokic_rn1619.databinding.ActivitySubjectBinding
+import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.contract.StudentContract
 import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.view.recycler.adapter.SubjectAdapter
 import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.view.states.SubjectState
+import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.viewmodel.StudentViewModel
 import timber.log.Timber
+import java.util.regex.Pattern
+
 
 class SubjectActivity : AppCompatActivity() {
 
@@ -21,10 +25,16 @@ class SubjectActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySubjectBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        studentViewModel.fetchAllSubjects()
+        initView()
         initObservers()
         initRecycler()
         initListeners()
+    }
+
+    private fun initView() {
+        studentViewModel.fetchAllSubjects()
+        studentViewModel.getAllSubjects()
+//        Timber.e("$setOfGroups")
     }
 
     private fun initObservers() {
@@ -77,10 +87,16 @@ class SubjectActivity : AppCompatActivity() {
             is SubjectState.Success -> {
                 Timber.e("Success")
                 adapter.submitList(state.subject)
-//                val subjects = state.subject
-//                for (ingredient in subjects) {
-//                    binding.subjectTv.text = binding.ingredientsTv.text.toString() + "\n" + ingredient
-//                }
+                val subjects = state.subject
+                val setOfGroups = mutableSetOf<String>()
+                for (subject in subjects) {
+                    val delimiter = "[,]{1}[\\s]?"
+                    val array = Pattern.compile(delimiter).split(subject.grupe)
+                    for (s in array) {
+                        setOfGroups.add(s)
+                    }
+                }
+                setSpinner(setOfGroups)
             }
             is SubjectState.Error -> {
                 Timber.e("Error")
@@ -92,5 +108,17 @@ class SubjectActivity : AppCompatActivity() {
                 Timber.e("Loading")
             }
         }
+    }
+
+    private fun setSpinner(setOfGroups : Set<String>) {
+        val groupAdapter = ArrayAdapter<String>(this, R.layout.simple_spinner_item, ArrayList())
+        groupAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        binding.groupSpinner.adapter = groupAdapter
+        groupAdapter.addAll(setOfGroups.toList().sorted())
+
+        val dayAdapter = ArrayAdapter<String>(this, R.layout.simple_spinner_item, ArrayList())
+        dayAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        binding.daySpinner.adapter = dayAdapter
+        dayAdapter.addAll("PON", "UTO", "SRE", "CET", "PET")
     }
 }

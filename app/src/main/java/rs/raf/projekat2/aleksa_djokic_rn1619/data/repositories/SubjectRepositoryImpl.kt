@@ -1,20 +1,19 @@
 package rs.raf.projekat2.aleksa_djokic_rn1619.data.repositories
 
+import androidx.compose.runtime.sourceInformationMarkerEnd
 import io.reactivex.Observable
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.datasource.local.StudentDao
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.datasource.remote.StudentService
-import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.Note
-import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.Resource
-import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.Subject
-import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.SubjectEntity
+import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.*
 import timber.log.Timber
+import java.util.regex.Pattern
 
-class StudentRepositoryImpl (
+class SubjectRepositoryImpl (
     private val localDataSource: StudentDao,
     private val remoteDataSource: StudentService
-) : StudentRepository {
+) : SubjectRepository {
 
-    override fun fetchAllSubjects(): Observable<Resource<Unit>> {
+    override fun fetchAll(): Observable<Resource<Unit>> {
         return remoteDataSource
             .getAllSubjects()
             .doOnNext {
@@ -43,7 +42,7 @@ class StudentRepositoryImpl (
             }
     }
 
-    override fun getAllSubjects(): Observable<List<Subject>> {
+    override fun getAll(): Observable<List<Subject>> {
         return localDataSource
             .getAllSubjects()
             .map {
@@ -62,8 +61,17 @@ class StudentRepositoryImpl (
             }
     }
 
-    override fun getAllNotes(): Observable<List<Note>> {
-        TODO("Not yet implemented")
+    override fun getGroupAndDay(): Observable<List<SubjectGroupAndDay>> {
+        return localDataSource
+            .getAllGroups()
+            .map{ it ->
+                it.map{
+                    SubjectGroupAndDay(
+                        grupe = it.grupe,
+                        dan = it.dan
+                    )
+                }
+            }
     }
 
 }
