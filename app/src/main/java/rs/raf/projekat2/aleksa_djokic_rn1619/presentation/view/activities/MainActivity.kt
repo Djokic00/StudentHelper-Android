@@ -2,24 +2,25 @@ package rs.raf.projekat2.aleksa_djokic_rn1619.presentation.view.activities
 
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import rs.raf.projekat2.aleksa_djokic_rn1619.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initListeners();
+        initListeners()
+
     }
 
     private fun initListeners() {
         binding.scheduleImg.setOnClickListener {
-            val intent = Intent(this, ScheduleActivity::class.java)
+            val intent = Intent(this, SubjectActivity::class.java)
             startActivity(intent)
         }
 

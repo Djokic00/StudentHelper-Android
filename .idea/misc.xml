@@ -15,14 +15,19 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.32685185185185184" />
         <entry key="app/src/main/res/drawable/logout_icon.xml" value="0.306140350877193" />
         <entry key="app/src/main/res/drawable/note_icon.xml" value="0.29254385964912283" />
+        <entry key="app/src/main/res/drawable/search_background_style.xml" value="0.30173160173160174" />
+        <entry key="app/src/main/res/drawable/title_background_style.xml" value="0.30173160173160174" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_new_note.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_note.xml" value="0.2942982456140351" />
         <entry key="app/src/main/res/layout/activity_note_recycler.xml" value="0.29385964912280704" />
-        <entry key="app/src/main/res/layout/activity_schedule.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_schedule.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_schedule_recycler.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_schedule_template.xml" value="0.2942982456140351" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3140625" />
+        <entry key="app/src/main/res/layout/activity_subject.xml" value="0.1437446443873179" />
+        <entry key="app/src/main/res/layout/activity_subject_template.xml" value="0.5" />
       </map>
     </option>
   </component>

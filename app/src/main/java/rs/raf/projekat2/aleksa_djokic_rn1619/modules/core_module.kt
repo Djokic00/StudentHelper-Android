@@ -7,13 +7,14 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import rs.raf.projekat2.aleksa_djokic_rn1619.BuildConfig
+import rs.raf.projekat2.aleksa_djokic_rn1619.data.datasource.local.StudentDB
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -24,8 +25,8 @@ val coreModule = module {
     }
 
     single {
-//        Room.databaseBuilder(androidContext(), RecipeDB::class.java, "RecipeDB")
-//            .fallbackToDestructiveMigration().build()
+        Room.databaseBuilder(androidContext(), StudentDB::class.java, "StudentDB")
+            .fallbackToDestructiveMigration().build()
     }
 
     single { createRetrofit(moshi = get(), httpClient = get()) }
@@ -43,7 +44,7 @@ fun createMoshi(): Moshi {
 
 fun createRetrofit(moshi: Moshi, httpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
-        .baseUrl("https://rfidis.raf.edu.rs/raspored/json.php")
+        .baseUrl("https://rfidis.raf.edu.rs/")
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
         .client(httpClient)
@@ -66,7 +67,5 @@ fun createOkHttpClient(): OkHttpClient {
 }
 
 inline fun <reified T> create(retrofit: Retrofit): T  {
-    return retrofit.create<T>(T::class.java)
+    return retrofit.create(T::class.java)
 }
-
-//

@@ -8,6 +8,11 @@
     <string name="search">Search</string>
     <string name="search_hint">Professor/Subject</string>
     <string name="note_search">Search by title or content</string>
+    <string name="new_note_title">Title</string>
+    <string name="new_note_content">This is a note content...</string>
+    <string name="save_note">Save</string>
+    <string name="cancel_note">Cancel</string>
+    <string name="hyphen">-</string>
     <string-array name="group">
         <item>Group</item>
     </string-array>
