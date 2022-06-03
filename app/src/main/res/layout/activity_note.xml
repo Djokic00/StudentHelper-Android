@@ -8,7 +8,7 @@
         tools:context=".presentation.view.activities.SubjectActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/inProgressRv"
+            android:id="@+id/noteRv"
             android:layout_width="393dp"
             android:layout_height="500dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,6 +43,13 @@
             app:backgroundTint="@color/RafBlue"
             app:srcCompat="@drawable/add_note_icon"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+    <ProgressBar
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loadingPb"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

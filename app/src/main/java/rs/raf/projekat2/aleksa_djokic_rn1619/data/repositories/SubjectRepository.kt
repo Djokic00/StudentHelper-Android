@@ -11,6 +11,7 @@ interface SubjectRepository {
     fun fetchAll(): Observable<Resource<Unit>>
     fun getAll(): Observable<List<Subject>>
     fun getGroupAndDay(): Observable<List<SubjectGroupAndDay>>
-
-//    fun filterByGroupAndDay(): Observable<List<>>
+    fun filterByGroup(group: String): Observable<List<Subject>>
+    fun filterByDay(day: String): Observable<List<Subject>>
+    fun filterByGroupAndDay(group: String, day: String): Observable<List<Subject>>
 }

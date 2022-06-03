@@ -14,9 +14,19 @@ interface StudentContract {
 
         fun fetchAllSubjects()
         fun getAllSubjects()
-        fun getAllGroupsAndDays()
-//        fun filterSubjectByGroup()
-//        fun filterSubjectByGroupAndDay()
+
+        // Metode koje su za predmet i profesor idu zajedno ili neka druga fora?
+        fun filterSubjectsByGroup(group: String)
+        fun filterSubjectByDay(day: String)
+        fun filterSubjectByGroupAndDay(group: String, day: String)
+        fun filterSubjectByText(text: String) // i za profesora i za predmet?
+
+//        fun filterSubjectByGroupDayProfessor(group: String, day: String, professor: String)
+//        fun filterSubjectByGroupDaySubject(group: String, day: String, subject: String)
+//        fun filterSubjectByDayAndProfessor(group: String, day: String, professor: String)
+//        fun filterSubjectByDayAndSubject(group: String, day: String, professor: String)
+//        fun filterSubjectBySubject(group: String, day: String, professor: String)
+
         fun getAllNotes()
         fun editNote(id: Int)
         fun saveNote(note: Note)

@@ -4,9 +4,11 @@ import android.R
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.Subject
 import rs.raf.projekat2.aleksa_djokic_rn1619.databinding.ActivitySubjectBinding
 import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.contract.StudentContract
 import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.view.recycler.adapter.SubjectAdapter
@@ -21,6 +23,7 @@ class SubjectActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySubjectBinding
     private val studentViewModel: StudentContract.ViewModel by viewModel<StudentViewModel>()
     private lateinit var adapter: SubjectAdapter
+    private var flag : Boolean = false
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySubjectBinding.inflate(layoutInflater)
@@ -32,19 +35,60 @@ class SubjectActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        studentViewModel.fetchAllSubjects()
-        studentViewModel.getAllSubjects()
+//        studentViewModel.fetchAllSubjects()
+//        studentViewModel.getAllSubjects()
 //        Timber.e("$setOfGroups")
     }
 
     private fun initObservers() {
-        studentViewModel.subjectState.observe(this, Observer {
+        studentViewModel.subjectState.observe(this) {
             renderState(it)
-        })
+        }
+        // Prvi put kad pokrenemo aplikaciju podaci nece biti kesirani i zbog toga vraca praznu listu
+        // studentViewModel.getAllSubjects() // prvo vraca praznu listu
+        // studentViewModel.fetchAllSubjects() // zatim dohvatamo sa interneta i override ove koje se nalaze u bazi
+        // kad se desi upis (deleteAndInsert) onda se opet okida query da se vrate svi podaci
+        // sto ce biti observe-ovano gore i uci ce u metodu renderState(it)
+        studentViewModel.getAllSubjects()
+        studentViewModel.fetchAllSubjects()
+
     }
 
     private fun initListeners() {
-
+        binding.searchButton.setOnClickListener {
+            val group = binding.groupSpinner.selectedItem.toString()
+            val day = binding.daySpinner.selectedItem.toString()
+            val textField = binding.searchEt.text
+            if (group != "Group" && day == "Day" && textField.isBlank()) {
+                studentViewModel.filterSubjectsByGroup(group)
+                Timber.e("1 - Po grupi")
+            }
+            else if (group == "Group" && day != "Day" && textField.isBlank()) {
+                studentViewModel.filterSubjectByDay(day)
+                    Timber.e("2 - Po danu")
+            }
+            else if (group != "Group" && day != "Day" && textField.isBlank()) {
+                studentViewModel.filterSubjectByGroupAndDay(group, day)
+                Timber.e("3 - Po grupi i danu")
+            }
+            else if (group != "Group" && day != "Day" && textField.isNotBlank()) {
+                // filterByAll metoda
+                Timber.e("RADI (3)")
+            }
+            else if (group != "Group" && day == "Day" && textField.isNotBlank()) {
+                // filterByGroupAndField metoda
+                Timber.e("RADI (4)")
+            }
+            else if (group == "Group" && day != "Day" && textField.isNotBlank()) {
+                // filterByDayAndField metoda
+                Timber.e("RADI (5)")
+            }
+            else if (group == "Group" && day == "Day" && textField.isNotBlank()) {
+                // filterByField metoda
+                Timber.e("RADI (6)")
+            }
+            else studentViewModel.getAllSubjects()
+        }
     }
 
     private fun initRecycler() {
@@ -85,40 +129,55 @@ class SubjectActivity : AppCompatActivity() {
     private fun renderState(state: SubjectState) {
         when (state) {
             is SubjectState.Success -> {
+                showLoadingState(false)
                 Timber.e("Success")
                 adapter.submitList(state.subject)
-                val subjects = state.subject
-                val setOfGroups = mutableSetOf<String>()
-                for (subject in subjects) {
-                    val delimiter = "[,]{1}[\\s]?"
-                    val array = Pattern.compile(delimiter).split(subject.grupe)
-                    for (s in array) {
-                        setOfGroups.add(s)
-                    }
+                if (!flag) {
+                    setSpinner(state.subject)
+                    flag = true
                 }
-                setSpinner(setOfGroups)
             }
             is SubjectState.Error -> {
+                showLoadingState(false)
                 Timber.e("Error")
             }
             is SubjectState.DataFetched -> {
+                showLoadingState(false)
                 Timber.e("Data fetched")
             }
             is SubjectState.Loading -> {
+                showLoadingState(true)
                 Timber.e("Loading")
             }
         }
     }
 
-    private fun setSpinner(setOfGroups : Set<String>) {
+    private fun showLoadingState(loading: Boolean) {
+        binding.groupSpinner.isVisible = !loading
+        binding.daySpinner.isVisible = !loading
+        binding.subjectRv.isVisible = !loading
+        binding.loadingPb.isVisible = loading
+    }
+
+    private fun setSpinner(subjects: List<Subject>) {
+        val setOfGroups = mutableSetOf<String>()
+        for (subject in subjects) {
+            val delimiter = "[,]{1}[\\s]?"
+            val array = Pattern.compile(delimiter).split(subject.grupe)
+            for (s in array) {
+                setOfGroups.add(s)
+            }
+        }
         val groupAdapter = ArrayAdapter<String>(this, R.layout.simple_spinner_item, ArrayList())
         groupAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
         binding.groupSpinner.adapter = groupAdapter
+        groupAdapter.add("Group")
         groupAdapter.addAll(setOfGroups.toList().sorted())
 
         val dayAdapter = ArrayAdapter<String>(this, R.layout.simple_spinner_item, ArrayList())
         dayAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
         binding.daySpinner.adapter = dayAdapter
-        dayAdapter.addAll("PON", "UTO", "SRE", "CET", "PET")
+        dayAdapter.add("Day")
+        dayAdapter.addAll("PON", "UTO", "SRE", "ČET", "PET")
     }
 }

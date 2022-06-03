@@ -7,6 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.Note
+import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.NoteEntity
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.Resource
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.repositories.NoteRepository
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.repositories.SubjectRepository
@@ -89,23 +90,14 @@ class StudentViewModel (
         subscriptions.add(subscription)
     }
 
-    override fun getAllGroupsAndDays() {
-        // val setOfGroups = mutableSetOf<String>()
+    override fun filterSubjectsByGroup(group: String) {
         val subscription = subjectRepository
-            .getGroupAndDay()
+            .filterByGroup(group)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-//                    it.forEach {
-//                        val group = it.grupe
-//                        val delimiter = "[,]{1}[\\s]?"
-//                        val array = Pattern.compile(delimiter).split(group)
-//                        for (s in array) {
-//                            setOfGroups.add(s)
-//                        }
-//                    }
-                    // subjectState.value = SubjectState.Success(it)
+                    subjectState.value = SubjectState.Success(it)
                 },
                 {
                     subjectState.value = SubjectState.Error("Error happened while fetching data from db")
@@ -115,12 +107,82 @@ class StudentViewModel (
         subscriptions.add(subscription)
     }
 
-    override fun getAllNotes() {
+    override fun filterSubjectByDay(day: String) {
+        val subscription = subjectRepository
+            .filterByDay(day)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    subjectState.value = SubjectState.Success(it)
+                },
+                {
+                    subjectState.value = SubjectState.Error("Error happened while fetching data from db")
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
+    override fun filterSubjectByGroupAndDay(group: String, day: String) {
+        val subscription = subjectRepository
+            .filterByGroupAndDay(group, day)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    subjectState.value = SubjectState.Success(it)
+                },
+                {
+                    subjectState.value = SubjectState.Error("Error happened while fetching data from db")
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
+    override fun filterSubjectByText(text: String) {
         TODO("Not yet implemented")
     }
 
+    override fun getAllNotes() {
+        val subscription = noteRepository
+            .getAll()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    noteState.value = NoteState.Success(it)
+                },
+                {
+                    subjectState.value = SubjectState.Error("Error happened while fetching data from db")
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
     override fun saveNote(note: Note) {
-        TODO("Not yet implemented")
+        val subscription = noteRepository
+            .save(
+                NoteEntity(
+                    id = 0,
+                    title = note.title,
+                    content = note.content
+                )
+            )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    Timber.e("Saved")
+                },
+                {
+                    noteState.value = NoteState.Error("Error updating db")
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
     }
 
     override fun editNote(id: Int) {
@@ -128,7 +190,7 @@ class StudentViewModel (
     }
 
     override fun deleteNote(id: Int) {
-        TODO("Not yet implemented")
+
     }
 
 }
