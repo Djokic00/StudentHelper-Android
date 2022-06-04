@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.statisticsImg.setOnClickListener {
+            val intent = Intent(this, StatisticsActivity::class.java)
+            startActivity(intent)
+        }
+
         val sharedPreferences = getSharedPreferences(packageName, MODE_PRIVATE)
         binding.logoutImg.setOnClickListener {
             sharedPreferences.edit().clear().apply()

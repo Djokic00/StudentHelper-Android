@@ -28,16 +28,11 @@ class SubjectActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySubjectBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initView()
+        studentViewModel.getAllSubjects()
+        studentViewModel.fetchAllSubjects()
         initObservers()
         initRecycler()
         initListeners()
-    }
-
-    private fun initView() {
-//        studentViewModel.fetchAllSubjects()
-//        studentViewModel.getAllSubjects()
-//        Timber.e("$setOfGroups")
     }
 
     private fun initObservers() {
@@ -49,8 +44,6 @@ class SubjectActivity : AppCompatActivity() {
         // studentViewModel.fetchAllSubjects() // zatim dohvatamo sa interneta i override ove koje se nalaze u bazi
         // kad se desi upis (deleteAndInsert) onda se opet okida query da se vrate svi podaci
         // sto ce biti observe-ovano gore i uci ce u metodu renderState(it)
-        studentViewModel.getAllSubjects()
-        studentViewModel.fetchAllSubjects()
 
     }
 
@@ -58,34 +51,31 @@ class SubjectActivity : AppCompatActivity() {
         binding.searchButton.setOnClickListener {
             val group = binding.groupSpinner.selectedItem.toString()
             val day = binding.daySpinner.selectedItem.toString()
-            val textField = binding.searchEt.text
+            val textField = binding.searchEt.text.toString()
+
+            // studentViewModel.filter(group, day, textField)
+
             if (group != "Group" && day == "Day" && textField.isBlank()) {
-                studentViewModel.filterSubjectsByGroup(group)
-                Timber.e("1 - Po grupi")
+                studentViewModel.filterSubject(group, "", "") // Po grupi
             }
             else if (group == "Group" && day != "Day" && textField.isBlank()) {
-                studentViewModel.filterSubjectByDay(day)
-                    Timber.e("2 - Po danu")
-            }
-            else if (group != "Group" && day != "Day" && textField.isBlank()) {
-                studentViewModel.filterSubjectByGroupAndDay(group, day)
-                Timber.e("3 - Po grupi i danu")
-            }
-            else if (group != "Group" && day != "Day" && textField.isNotBlank()) {
-                // filterByAll metoda
-                Timber.e("RADI (3)")
-            }
-            else if (group != "Group" && day == "Day" && textField.isNotBlank()) {
-                // filterByGroupAndField metoda
-                Timber.e("RADI (4)")
-            }
-            else if (group == "Group" && day != "Day" && textField.isNotBlank()) {
-                // filterByDayAndField metoda
-                Timber.e("RADI (5)")
+                studentViewModel.filterSubject("", day, "") // Po danu
             }
             else if (group == "Group" && day == "Day" && textField.isNotBlank()) {
-                // filterByField metoda
-                Timber.e("RADI (6)")
+                studentViewModel.filterSubject("", "", textField) // Po tekstu
+            }
+            else if (group != "Group" && day != "Day" && textField.isBlank()) {
+                studentViewModel.filterSubject(group, day, "") // Po grupi i danu
+            }
+            else if (group != "Group" && day == "Day" && textField.isNotBlank()) {
+                studentViewModel.filterSubject(group, "", textField) // Po grupi i polju
+            }
+            else if (group == "Group" && day != "Day" && textField.isNotBlank()) {
+                studentViewModel.filterSubject("", day, textField) // Po danu i polju
+            }
+
+            else if (group != "Group" && day != "Day" && textField.isNotBlank()) {
+                studentViewModel.filterSubject(group, day, textField) // svi parametri
             }
             else studentViewModel.getAllSubjects()
         }
@@ -95,35 +85,6 @@ class SubjectActivity : AppCompatActivity() {
         binding.subjectRv.layoutManager = LinearLayoutManager(this)
         adapter = SubjectAdapter()
         binding.subjectRv.adapter = adapter
-
-//        binding.categoryRv.layoutManager = LinearLayoutManager(this)
-//        categoryAdapter = CategoryAdapter() {
-//            println(it.title)
-//            binding.categoryRv.visibility = View.GONE
-//            binding.recipeRv.visibility = View.VISIBLE
-//            binding.savedRecipeRv.visibility = View.GONE
-//            recipeViewModel.deleteRecipes()
-//            recipeViewModel.getRecipes(it.title)
-//            recipeViewModel.getRecipesPage(it.title, "1")
-//        }
-//        binding.categoryRv.adapter = categoryAdapter
-//        categoryAdapter.submitList(categories)
-//
-//        binding.recipeRv.layoutManager = LinearLayoutManager(this)
-//        recipeAdapter = RecipeAdapter() {
-//            val intent = Intent(this, RecipeDetailsActivity::class.java)
-//            intent.putExtra("RECIPE", it)
-//            startActivity(intent)
-//        }
-//        binding.recipeRv.adapter = recipeAdapter
-//
-//        binding.savedRecipeRv.layoutManager = LinearLayoutManager(this)
-//        savedRecipeAdapter = SavedRecipeAdapter() {
-//            val intent = Intent(this, SavedRecipeDetailsActivity::class.java)
-//            intent.putExtra("RECIPE", it)
-//            startActivity(intent)
-//        }
-//        binding.savedRecipeRv.adapter = savedRecipeAdapter
     }
 
     private fun renderState(state: SubjectState) {
@@ -131,7 +92,12 @@ class SubjectActivity : AppCompatActivity() {
             is SubjectState.Success -> {
                 showLoadingState(false)
                 Timber.e("Success")
+
+                println("Velicina liste je")
+                println(state.subject.size)
+
                 adapter.submitList(state.subject)
+
                 if (!flag) {
                     setSpinner(state.subject)
                     flag = true

@@ -4,9 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.Note
+import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.NoteResponse
 import rs.raf.projekat2.aleksa_djokic_rn1619.databinding.ActivityNoteBinding
 import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.contract.StudentContract
 import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.view.recycler.adapter.NoteAdapter
@@ -30,6 +31,16 @@ class NoteActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
+        binding.searchNoteEt.doAfterTextChanged {
+            val text = binding.searchNoteEt.text.toString()
+            println(text)
+            studentViewModel.getNoteByFilter(text)
+        }
+
+        binding.switch1.setOnCheckedChangeListener { _, _ ->
+            studentViewModel.getAllNotes()
+        }
+
         binding.addNoteBtn.setOnClickListener {
             val intent = Intent(this, NewNoteActivity::class.java)
             startActivity(intent)
@@ -45,24 +56,36 @@ class NoteActivity : AppCompatActivity() {
 
     private fun initRecycler() {
         binding.noteRv.layoutManager = LinearLayoutManager(this)
-//        adapter = NoteAdapter {item ->
-////            println(item.id)
-////            println(item.title)
-//        }
-//        adapter = NoteAdapter{item ->
-//            print(item.id)
-//        }
+        adapter = NoteAdapter(
+            {item ->
+                println(item.title)
+            },
+            {item -> studentViewModel.deleteNote(item.id)},
+            {item ->
+                val intent = Intent(this, EditNoteActivity::class.java)
+                intent.putExtra("NOTE", item)
+                startActivity(intent)
+            },
+            { item ->
+                studentViewModel.changeNoteState(item.id)
+            }
+        )
         binding.noteRv.adapter = adapter
     }
 
-
-
     private fun renderState(state: NoteState) {
+        val listOfNotes: List<NoteResponse>
         when (state) {
             is NoteState.Success -> {
                 showLoadingState(false)
                 Timber.e("Success")
-                adapter.submitList(state.notes)
+                listOfNotes = if (!binding.switch1.isChecked) {
+                    state.notes.filter {
+                        !it.archive
+                    }
+                } else state.notes
+                println(listOfNotes)
+                adapter.submitList(listOfNotes)
             }
             is NoteState.Error -> {
                 showLoadingState(false)

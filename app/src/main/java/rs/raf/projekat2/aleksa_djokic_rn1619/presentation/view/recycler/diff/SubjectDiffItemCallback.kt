@@ -13,9 +13,9 @@ class SubjectDiffItemCallback: DiffUtil.ItemCallback<Subject>() {
         return oldItem.predmet == newItem.predmet
                 && oldItem.tip == newItem.tip
                 && oldItem.nastavnik == newItem.nastavnik
-//                && oldItem.grupe == newItem.grupe
-//                && oldItem.dan == newItem.dan
-//                && oldItem.ucionica == newItem.ucionica
-//                && oldItem.termin == newItem.termin
+                && oldItem.grupe == newItem.grupe
+                && oldItem.dan == newItem.dan
+                && oldItem.ucionica == newItem.ucionica
+                && oldItem.termin == newItem.termin
     }
 }

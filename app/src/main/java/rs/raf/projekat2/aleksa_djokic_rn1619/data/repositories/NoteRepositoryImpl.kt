@@ -5,28 +5,45 @@ import io.reactivex.Observable
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.datasource.local.StudentDao
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.Note
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.NoteEntity
+import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.NoteResponse
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.Subject
 
 class NoteRepositoryImpl(
     private val localDataSource: StudentDao,
 ) : NoteRepository {
 
-    override fun getAll(): Observable<List<Note>> {
+    override fun getAll(): Observable<List<NoteResponse>> {
         return localDataSource
             .getAllNotes()
             .map {
                 it.map {
-                    Note(
-                        id = 0,
+                    NoteResponse(
+                        id = it.id,
                         title = it.title,
-                        content = it.content
+                        content = it.content,
+                        archive = it.archive
                     )
                 }
             }
     }
 
-    override fun edit(id: Int): Observable<Note> {
-        TODO("Not yet implemented")
+    override fun getNonArchivedNotes(): Observable<List<NoteResponse>> {
+        return localDataSource
+            .getNonArchivedNotes()
+            .map {
+                it.map {
+                    NoteResponse(
+                        id = it.id,
+                        title = it.title,
+                        content = it.content,
+                        archive = it.archive
+                    )
+                }
+            }
+    }
+
+    override fun edit(id: Int, newTitle: String, newContent: String): Completable {
+        return localDataSource.editNote(id, newTitle, newContent)
     }
 
     override fun save(note: NoteEntity): Completable {
@@ -35,6 +52,20 @@ class NoteRepositoryImpl(
 
     override fun delete(id: Int): Completable {
         return localDataSource.deleteNote(id)
+    }
+
+    override fun changeState(id: Int): Completable {
+        return localDataSource.changeNoteState(id)
+    }
+
+    override fun filter(text: String): Observable<List<NoteResponse>> {
+        return localDataSource
+            .filterNote(text)
+            .map {
+                it.map {
+                    NoteResponse(it.id, it.title, it.content, it.archive)
+                }
+            }
     }
 
 

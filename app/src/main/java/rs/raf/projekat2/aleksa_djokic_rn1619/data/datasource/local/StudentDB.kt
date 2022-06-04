@@ -3,7 +3,7 @@ package rs.raf.projekat2.aleksa_djokic_rn1619.data.datasource.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import rs.raf.projekat2.aleksa_djokic_rn1619.data.datasource.local.converters.ListConverter
+import rs.raf.projekat2.aleksa_djokic_rn1619.data.datasource.local.converters.DateConverter
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.NoteEntity
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.SubjectEntity
 
@@ -12,7 +12,7 @@ import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.SubjectEntity
     version = 1,
     exportSchema = false
 )
-//@TypeConverters(ListConverter::class)
+@TypeConverters(DateConverter::class)
 abstract class StudentDB : RoomDatabase() {
     abstract fun getStudentDao() : StudentDao
 }

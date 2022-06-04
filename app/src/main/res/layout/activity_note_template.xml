@@ -54,7 +54,14 @@
             style="@style/ImageViewStyle"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
 
-
+    <ImageView
+            android:id="@+id/unarchiveImg"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:src="@drawable/unarchive_icon"
+            style="@style/ImageViewStyle"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+           />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

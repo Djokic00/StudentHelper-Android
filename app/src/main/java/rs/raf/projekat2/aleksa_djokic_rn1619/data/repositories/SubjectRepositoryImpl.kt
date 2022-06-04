@@ -17,6 +17,7 @@ class SubjectRepositoryImpl (
         return remoteDataSource
             .getAllSubjects()
             .doOnNext {
+                println(it.size)
                 Timber.e("Upis u bazu")
                 val entities: List<SubjectEntity> = it.map {
                     SubjectEntity(
@@ -30,7 +31,6 @@ class SubjectRepositoryImpl (
                         ucionica = it.ucionica
                     )
                 }
-
                 localDataSource.deleteAndInsertAll(entities)
             }
             .map {
@@ -44,7 +44,7 @@ class SubjectRepositoryImpl (
             .map {
                 it.map {
                     Subject(
-                        id = 0,
+                        id = it.id,
                         predmet =  it.predmet,
                         tip = it.tip,
                         nastavnik = it.nastavnik,
@@ -57,60 +57,60 @@ class SubjectRepositoryImpl (
             }
     }
 
-    override fun getGroupAndDay(): Observable<List<SubjectGroupAndDay>> {
-        return localDataSource
-            .getAllGroups()
-            .map{ it ->
-                it.map{
-                    SubjectGroupAndDay(
-                        grupe = it.grupe,
-                        dan = it.dan
-                    )
-                }
-            }
-    }
+//    override fun getGroupAndDay(): Observable<List<SubjectGroupAndDay>> {
+//        return localDataSource
+//            .getAllGroups()
+//            .map{ it ->
+//                it.map{
+//                    SubjectGroupAndDay(
+//                        grupe = it.grupe,
+//                        dan = it.dan
+//                    )
+//                }
+//            }
+//    }
 
-    override fun filterByGroup(group: String): Observable<List<Subject>> {
-        return localDataSource
-            .filterByGroup(group)
-            .map {
-                it.map {
-                    Subject(
-                        id = 0,
-                        predmet =  it.predmet,
-                        tip = it.tip,
-                        nastavnik = it.nastavnik,
-                        grupe = it.grupe,
-                        dan = it.dan,
-                        termin = it.termin,
-                        ucionica = it.ucionica
-                    )
-                }
-            }
-    }
+//    override fun filterByGroup(group: String): Observable<List<Subject>> {
+//        return localDataSource
+//            .filterByGroup(group)
+//            .map {
+//                it.map {
+//                    Subject(
+//                        id = 0,
+//                        predmet =  it.predmet,
+//                        tip = it.tip,
+//                        nastavnik = it.nastavnik,
+//                        grupe = it.grupe,
+//                        dan = it.dan,
+//                        termin = it.termin,
+//                        ucionica = it.ucionica
+//                    )
+//                }
+//            }
+//    }
 
-    override fun filterByDay(day: String): Observable<List<Subject>> {
-        return localDataSource
-            .filterByDay(day)
-            .map {
-                it.map {
-                    Subject(
-                        id = 0,
-                        predmet =  it.predmet,
-                        tip = it.tip,
-                        nastavnik = it.nastavnik,
-                        grupe = it.grupe,
-                        dan = it.dan,
-                        termin = it.termin,
-                        ucionica = it.ucionica
-                    )
-                }
-            }
-    }
+//    override fun filterByDay(day: String): Observable<List<Subject>> {
+//        return localDataSource
+//            .filterByDay(day)
+//            .map {
+//                it.map {
+//                    Subject(
+//                        id = 0,
+//                        predmet =  it.predmet,
+//                        tip = it.tip,
+//                        nastavnik = it.nastavnik,
+//                        grupe = it.grupe,
+//                        dan = it.dan,
+//                        termin = it.termin,
+//                        ucionica = it.ucionica
+//                    )
+//                }
+//            }
+//    }
 
-    override fun filterByGroupAndDay(group: String, day: String): Observable<List<Subject>> {
+    override fun filter(group: String, day: String, text: String): Observable<List<Subject>> {
         return localDataSource
-            .filterByGroupAndDay(group, day)
+            .filter(group, day, text)
             .map {
                 it.map {
                     Subject(

@@ -6,7 +6,10 @@
         <entry key="../../../../../layout/compose-model-1653833066135.xml" value="0.5" />
         <entry key="../../../../../layout/compose-model-1653843952727.xml" value="0.33" />
         <entry key="../../../../../layout/compose-model-1653853807762.xml" value="0.2722222222222222" />
+        <entry key="../../../../../layout/compose-model-1654295388131.xml" value="0.25092592592592594" />
+        <entry key="../../../../../layout/compose-model-1654383162789.xml" value="0.3064584212747995" />
         <entry key="app/src/main/res/drawable/add_note_icon.xml" value="0.3034632034632035" />
+        <entry key="app/src/main/res/drawable/archive_icon.xml" value="0.2759259259259259" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.3034632034632035" />
         <entry key="app/src/main/res/drawable/ic_baseline_bar_chart_24.xml" value="0.2037037037037037" />
         <entry key="app/src/main/res/drawable/ic_baseline_edit_note_24.xml" value="0.2037037037037037" />
@@ -17,6 +20,7 @@
         <entry key="app/src/main/res/drawable/note_icon.xml" value="0.29254385964912283" />
         <entry key="app/src/main/res/drawable/search_background_style.xml" value="0.30173160173160174" />
         <entry key="app/src/main/res/drawable/title_background_style.xml" value="0.30173160173160174" />
+        <entry key="app/src/main/res/layout/activity_edit.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_new_note.xml" value="0.25" />
@@ -27,7 +31,8 @@
         <entry key="app/src/main/res/layout/activity_schedule_recycler.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_schedule_template.xml" value="0.2942982456140351" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3140625" />
-        <entry key="app/src/main/res/layout/activity_subject.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_statistics.xml" value="0.2942982456140351" />
+        <entry key="app/src/main/res/layout/activity_subject.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_subject_template.xml" value="0.33" />
       </map>
     </option>
