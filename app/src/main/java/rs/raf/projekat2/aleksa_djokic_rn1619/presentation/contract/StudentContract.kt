@@ -12,16 +12,15 @@ interface StudentContract {
 
         val noteState: LiveData<NoteState>
         val subjectState: LiveData<SubjectState>
-
         fun fetchAllSubjects()
         fun getAllSubjects()
         fun filterSubject(group: String, day: String, text: String)
-
         fun getAllNotes()
         fun editNote(id: Int, newTitle: String, newContent: String)
         fun saveNote(note: Note)
         fun deleteNote(id: Int)
         fun changeNoteState(id: Int)
         fun getNoteByFilter(text: String)
+        fun filterWithNull(group: String, day: String, text: String)
     }
 }

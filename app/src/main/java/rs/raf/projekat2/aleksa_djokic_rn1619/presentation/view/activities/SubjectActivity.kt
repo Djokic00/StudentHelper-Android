@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.projekat2.aleksa_djokic_rn1619.data.models.Subject
 import rs.raf.projekat2.aleksa_djokic_rn1619.databinding.ActivitySubjectBinding
@@ -49,35 +50,34 @@ class SubjectActivity : AppCompatActivity() {
 
     private fun initListeners() {
         binding.searchButton.setOnClickListener {
-            val group = binding.groupSpinner.selectedItem.toString()
-            val day = binding.daySpinner.selectedItem.toString()
-            val textField = binding.searchEt.text.toString()
+            val group = if (binding.groupSpinner.selectedItemPosition == 0) "" else binding.groupSpinner.selectedItem.toString()
+            val day = if (binding.daySpinner.selectedItemPosition == 0) "" else binding.daySpinner.selectedItem.toString()
+            val textField = binding.searchEt.text.toString().ifBlank { "" }
 
-            // studentViewModel.filter(group, day, textField)
+            studentViewModel.filterSubject(group, day, textField)
 
-            if (group != "Group" && day == "Day" && textField.isBlank()) {
-                studentViewModel.filterSubject(group, "", "") // Po grupi
-            }
-            else if (group == "Group" && day != "Day" && textField.isBlank()) {
-                studentViewModel.filterSubject("", day, "") // Po danu
-            }
-            else if (group == "Group" && day == "Day" && textField.isNotBlank()) {
-                studentViewModel.filterSubject("", "", textField) // Po tekstu
-            }
-            else if (group != "Group" && day != "Day" && textField.isBlank()) {
-                studentViewModel.filterSubject(group, day, "") // Po grupi i danu
-            }
-            else if (group != "Group" && day == "Day" && textField.isNotBlank()) {
-                studentViewModel.filterSubject(group, "", textField) // Po grupi i polju
-            }
-            else if (group == "Group" && day != "Day" && textField.isNotBlank()) {
-                studentViewModel.filterSubject("", day, textField) // Po danu i polju
-            }
-
-            else if (group != "Group" && day != "Day" && textField.isNotBlank()) {
-                studentViewModel.filterSubject(group, day, textField) // svi parametri
-            }
-            else studentViewModel.getAllSubjects()
+//            if (group != "Group" && day == "Day" && textField.isBlank()) {
+//                studentViewModel.filterSubject(group, "", "") // Po grupi
+//            }
+//            else if (group == "Group" && day != "Day" && textField.isBlank()) {
+//                studentViewModel.filterSubject("", day, "") // Po danu
+//            }
+//            else if (group == "Group" && day == "Day" && textField.isNotBlank()) {
+//                studentViewModel.filterSubject("", "", textField) // Po tekstu
+//            }
+//            else if (group != "Group" && day != "Day" && textField.isBlank()) {
+//                studentViewModel.filterSubject(group, day, "") // Po grupi i danu
+//            }
+//            else if (group != "Group" && day == "Day" && textField.isNotBlank()) {
+//                studentViewModel.filterSubject(group, "", textField) // Po grupi i polju
+//            }
+//            else if (group == "Group" && day != "Day" && textField.isNotBlank()) {
+//                studentViewModel.filterSubject("", day, textField) // Po danu i polju
+//            }
+//            else if (group != "Group" && day != "Day" && textField.isNotBlank()) {
+//                studentViewModel.filterSubject(group, day, textField) // svi parametri
+//            }
+//            else studentViewModel.getAllSubjects()
         }
     }
 

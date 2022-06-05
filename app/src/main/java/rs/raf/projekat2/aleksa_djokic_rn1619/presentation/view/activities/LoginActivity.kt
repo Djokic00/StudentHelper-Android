@@ -11,15 +11,13 @@ import rs.raf.projekat2.aleksa_djokic_rn1619.databinding.ActivityLoginBinding
 import rs.raf.projekat2.aleksa_djokic_rn1619.presentation.composable.LoginScreen
 
 class LoginActivity : AppCompatActivity() {
-//    private lateinit var binding: ActivityLoginBinding
-    private val PIN = "1234"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // sada kada smo ubacili setContent mozemo da obrisemo setContentView
         // ako se nalazimo u fragmentu onda ne mozemo da kazemo ovo setContent
         setContent {
-            LoginScreen() {
+            LoginScreen {
                 isInputValid(it)
             }
         }

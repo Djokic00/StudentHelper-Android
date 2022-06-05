@@ -21,22 +21,8 @@ class NoteRepositoryImpl(
                         id = it.id,
                         title = it.title,
                         content = it.content,
-                        archive = it.archive
-                    )
-                }
-            }
-    }
-
-    override fun getNonArchivedNotes(): Observable<List<NoteResponse>> {
-        return localDataSource
-            .getNonArchivedNotes()
-            .map {
-                it.map {
-                    NoteResponse(
-                        id = it.id,
-                        title = it.title,
-                        content = it.content,
-                        archive = it.archive
+                        archive = it.archive,
+                        date_of_creation = it.date_of_creation
                     )
                 }
             }
@@ -63,7 +49,7 @@ class NoteRepositoryImpl(
             .filterNote(text)
             .map {
                 it.map {
-                    NoteResponse(it.id, it.title, it.content, it.archive)
+                    NoteResponse(it.id, it.title, it.content, it.archive, it.date_of_creation)
                 }
             }
     }

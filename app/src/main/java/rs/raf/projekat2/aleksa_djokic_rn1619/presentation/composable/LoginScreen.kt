@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.sp
 
 
@@ -35,9 +36,8 @@ fun LoginScreen(onClick : (String) -> Unit) {
     Column(
         modifier = Modifier
         .fillMaxWidth()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(50.dp),
-//        verticalArrangement = Arrangement.Center,
+            .padding(15.dp),
+        verticalArrangement = Arrangement.spacedBy(40.dp),
         horizontalAlignment = Alignment.CenterHorizontally
             ) {
         var username = remember { mutableStateOf ("") }
@@ -53,7 +53,7 @@ fun LoginScreen(onClick : (String) -> Unit) {
         Image(
             painterResource(R.drawable.login_icon),
             contentDescription = null,
-            modifier = Modifier.requiredSize(200.dp)
+            modifier = Modifier.requiredSize(170.dp)
         )
 
         TextField(
@@ -64,7 +64,7 @@ fun LoginScreen(onClick : (String) -> Unit) {
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
             ),
-            shape = RoundedCornerShape(8.dp)
+            shape = RoundedCornerShape(8.dp),
         )
 
         TextField(
@@ -109,7 +109,6 @@ fun LoginScreen(onClick : (String) -> Unit) {
             } else onClick("OK")
         },
             modifier = Modifier.size(150.dp, 50.dp),
-//        contentPadding = PaddingValues(16.dp)
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = RafBlue,
                 contentColor = Color.White

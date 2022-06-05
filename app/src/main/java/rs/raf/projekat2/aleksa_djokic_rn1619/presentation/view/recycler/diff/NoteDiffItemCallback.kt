@@ -13,5 +13,6 @@ class NoteDiffItemCallback: DiffUtil.ItemCallback<NoteResponse>() {
     override fun areContentsTheSame(oldItem: NoteResponse, newItem: NoteResponse): Boolean {
         return oldItem.title == newItem.title
                 && oldItem.content == newItem.content
+                && oldItem.archive == newItem.archive
     }
 }

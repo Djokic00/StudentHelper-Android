@@ -44,11 +44,9 @@ class NoteViewHolder(
         itemBinding.trashImg
         itemBinding.editImg
         if (note.archive) {
-            println("USAO U TRUE")
             itemBinding.archiveImg.visibility = View.GONE
             itemBinding.unarchiveImg.visibility = View.VISIBLE
         } else {
-            println("USAO U FALSE")
             itemBinding.unarchiveImg.visibility = View.GONE
             itemBinding.archiveImg.visibility = View.VISIBLE
         }

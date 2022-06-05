@@ -11,14 +11,14 @@
             android:layout_width="216dp"
             android:layout_height="158dp" app:srcCompat="@drawable/schedule_icon"
             android:id="@+id/scheduleImg"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
     <ImageView
             android:layout_width="216dp"
             android:layout_height="165dp" app:srcCompat="@drawable/note_icon"
             android:id="@+id/noteImg"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scheduleImg"/>
 
@@ -26,7 +26,7 @@
             android:layout_width="209dp"
             android:layout_height="162dp" app:srcCompat="@drawable/statistics_icon"
             android:id="@+id/statisticsImg"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/noteImg"/>
 
@@ -34,7 +34,7 @@
             android:layout_width="204dp"
             android:layout_height="130dp" app:srcCompat="@drawable/logout_icon"
             android:id="@+id/logoutImg"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statisticsImg"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

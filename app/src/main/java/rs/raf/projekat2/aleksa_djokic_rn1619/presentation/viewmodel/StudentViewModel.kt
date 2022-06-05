@@ -245,9 +245,10 @@ class StudentViewModel (
         publishSubject.onNext(text)
     }
 
-//    override fun getNonArchivedNotes(): Observable<List<NoteResponse>> {
-//        TODO("Not yet implemented")
-//    }
+    override fun filterWithNull(group: String, day: String, text: String) {
+        TODO("Not yet implemented")
+    }
+
 
     override fun onCleared() {
         super.onCleared()
