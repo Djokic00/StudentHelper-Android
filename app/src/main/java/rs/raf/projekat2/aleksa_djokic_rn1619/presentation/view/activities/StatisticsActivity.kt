@@ -98,27 +98,27 @@ class StatisticsActivity : AppCompatActivity() {
             rotate(degrees = 180F) {
                 drawRect( // Prvo crtamo za 5ti dan (tj. danasnji dan)
                     color = RafBlue,
-                    size = Size(width = 120f, height = noteHistoryList[0] * 50f),
+                    size = Size(width = 120f, height = noteHistoryList[0] * 100f),
                     topLeft = Offset(x = 225f, y = 700f)
                 )
                 drawRect(
                     color = RafBlue,
-                    size = Size(width = 120f, height = noteHistoryList[1] * 50f),
+                    size = Size(width = 120f, height = noteHistoryList[1] * 100f),
                     topLeft = Offset(x = 350f, y = 700f)
                 )
                 drawRect(
                     color = RafBlue,
-                    size = Size(width = 120f, height = noteHistoryList[2] * 50f),
+                    size = Size(width = 120f, height = noteHistoryList[2] * 100f),
                     topLeft = Offset(x = 475f, y = 700f)
                 )
                 drawRect(
                     color = RafBlue,
-                    size = Size(width = 120f, height = noteHistoryList[3] * 50f),
+                    size = Size(width = 120f, height = noteHistoryList[3] * 100f),
                     topLeft = Offset(x = 600f, y = 700f)
                 )
                 drawRect(
                     color = RafBlue,
-                    size = Size(width = 120f, height = noteHistoryList[4] * 50f),
+                    size = Size(width = 120f, height = noteHistoryList[4] * 100f),
                     topLeft = Offset(x = 725f, y = 700f)
                 )
             }
