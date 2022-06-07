@@ -40,20 +40,19 @@ class StatisticsActivity : AppCompatActivity() {
 
     private fun initObservers() {
         studentViewModel.noteState.observe(this) {
-            getAllNotes(it)
+            renderState(it)
         }
         studentViewModel.getAllNotes()
     }
 
-    private fun getAllNotes(state: NoteState) {
-        val currentDate = Date()
+    private fun renderState(state: NoteState) {
+        //val currentDate = Date()
         val noteHistoryList = mutableListOf(0, 0, 0, 0, 0)
         when (state) {
             is NoteState.Success -> {
                 Timber.e("Success")
-                state.notes.sortedBy { it.date_of_creation }
                 state.notes.forEach {
-                    val currentDt = DateTime(currentDate)
+                    val currentDt = DateTime(Date())
                     val noteDt = DateTime(it.date_of_creation)
                     when (Days.daysBetween(currentDt.toLocalDate(), noteDt.toLocalDate()).days.absoluteValue) {
                         0 -> noteHistoryList[0] += 1

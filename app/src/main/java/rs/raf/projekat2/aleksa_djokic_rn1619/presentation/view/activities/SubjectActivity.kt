@@ -2,6 +2,7 @@ package rs.raf.projekat2.aleksa_djokic_rn1619.presentation.view.activities
 
 import android.R
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -95,6 +96,13 @@ class SubjectActivity : AppCompatActivity() {
 
                 println("Velicina liste je")
                 println(state.subject.size)
+
+                if (state.subject.isEmpty()) {
+                    // 204 cet
+                    binding.messageTv.visibility = View.VISIBLE
+                    binding.messageTv.text = "There are no matches for your search"
+                }
+                else binding.messageTv.visibility = View.GONE
 
                 adapter.submitList(state.subject)
 

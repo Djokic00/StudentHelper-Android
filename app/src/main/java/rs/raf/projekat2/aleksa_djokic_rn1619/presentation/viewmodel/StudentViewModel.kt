@@ -93,40 +93,6 @@ class StudentViewModel (
         subscriptions.add(subscription)
     }
 
-//    override fun filterSubjectsByGroup(group: String) {
-//        val subscription = subjectRepository
-//            .filterByGroup(group)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(
-//                {
-//                    subjectState.value = SubjectState.Success(it)
-//                },
-//                {
-//                    subjectState.value = SubjectState.Error("Error happened while fetching data from db")
-//                    Timber.e(it)
-//                }
-//            )
-//        subscriptions.add(subscription)
-//    }
-
-//    override fun filterSubjectByDay(day: String) {
-//        val subscription = subjectRepository
-//            .filterByDay(day)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(
-//                {
-//                    subjectState.value = SubjectState.Success(it)
-//                },
-//                {
-//                    subjectState.value = SubjectState.Error("Error happened while fetching data from db")
-//                    Timber.e(it)
-//                }
-//            )
-//        subscriptions.add(subscription)
-//    }
-
     override fun filterSubject(group: String, day: String, text: String) {
         val subscription = subjectRepository
             .filter(group, day, text)
@@ -144,9 +110,6 @@ class StudentViewModel (
         subscriptions.add(subscription)
     }
 
-//    override fun filterSubjectByText(text: String) {
-//        TODO("Not yet implemented")
-//    }
 
     override fun getAllNotes() {
         val subscription = noteRepository
@@ -243,10 +206,6 @@ class StudentViewModel (
 
     override fun getNoteByFilter(text: String) {
         publishSubject.onNext(text)
-    }
-
-    override fun filterWithNull(group: String, day: String, text: String) {
-        TODO("Not yet implemented")
     }
 
 

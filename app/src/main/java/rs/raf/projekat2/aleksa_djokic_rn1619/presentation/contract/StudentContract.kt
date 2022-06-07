@@ -21,6 +21,5 @@ interface StudentContract {
         fun deleteNote(id: Int)
         fun changeNoteState(id: Int)
         fun getNoteByFilter(text: String)
-        fun filterWithNull(group: String, day: String, text: String)
     }
 }

@@ -57,57 +57,6 @@ class SubjectRepositoryImpl (
             }
     }
 
-//    override fun getGroupAndDay(): Observable<List<SubjectGroupAndDay>> {
-//        return localDataSource
-//            .getAllGroups()
-//            .map{ it ->
-//                it.map{
-//                    SubjectGroupAndDay(
-//                        grupe = it.grupe,
-//                        dan = it.dan
-//                    )
-//                }
-//            }
-//    }
-
-//    override fun filterByGroup(group: String): Observable<List<Subject>> {
-//        return localDataSource
-//            .filterByGroup(group)
-//            .map {
-//                it.map {
-//                    Subject(
-//                        id = 0,
-//                        predmet =  it.predmet,
-//                        tip = it.tip,
-//                        nastavnik = it.nastavnik,
-//                        grupe = it.grupe,
-//                        dan = it.dan,
-//                        termin = it.termin,
-//                        ucionica = it.ucionica
-//                    )
-//                }
-//            }
-//    }
-
-//    override fun filterByDay(day: String): Observable<List<Subject>> {
-//        return localDataSource
-//            .filterByDay(day)
-//            .map {
-//                it.map {
-//                    Subject(
-//                        id = 0,
-//                        predmet =  it.predmet,
-//                        tip = it.tip,
-//                        nastavnik = it.nastavnik,
-//                        grupe = it.grupe,
-//                        dan = it.dan,
-//                        termin = it.termin,
-//                        ucionica = it.ucionica
-//                    )
-//                }
-//            }
-//    }
-
     override fun filter(group: String, day: String, text: String): Observable<List<Subject>> {
         return localDataSource
             .filter(group, day, text)
