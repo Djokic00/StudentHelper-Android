@@ -28,6 +28,7 @@ class StudentViewModel (
     override val subjectState: MutableLiveData<SubjectState> = MutableLiveData()
     override val noteState: MutableLiveData<NoteState> = MutableLiveData()
     private val publishSubject: PublishSubject<String> = PublishSubject.create()
+    // private val publishSubject1: PublishSubject<CourseFilter> = PublishSubject.create()
 
     init {
         val subscription = publishSubject

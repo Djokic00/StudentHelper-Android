@@ -54,31 +54,7 @@ class SubjectActivity : AppCompatActivity() {
             val group = if (binding.groupSpinner.selectedItemPosition == 0) "" else binding.groupSpinner.selectedItem.toString()
             val day = if (binding.daySpinner.selectedItemPosition == 0) "" else binding.daySpinner.selectedItem.toString()
             val textField = binding.searchEt.text.toString().ifBlank { "" }
-
             studentViewModel.filterSubject(group, day, textField)
-
-//            if (group != "Group" && day == "Day" && textField.isBlank()) {
-//                studentViewModel.filterSubject(group, "", "") // Po grupi
-//            }
-//            else if (group == "Group" && day != "Day" && textField.isBlank()) {
-//                studentViewModel.filterSubject("", day, "") // Po danu
-//            }
-//            else if (group == "Group" && day == "Day" && textField.isNotBlank()) {
-//                studentViewModel.filterSubject("", "", textField) // Po tekstu
-//            }
-//            else if (group != "Group" && day != "Day" && textField.isBlank()) {
-//                studentViewModel.filterSubject(group, day, "") // Po grupi i danu
-//            }
-//            else if (group != "Group" && day == "Day" && textField.isNotBlank()) {
-//                studentViewModel.filterSubject(group, "", textField) // Po grupi i polju
-//            }
-//            else if (group == "Group" && day != "Day" && textField.isNotBlank()) {
-//                studentViewModel.filterSubject("", day, textField) // Po danu i polju
-//            }
-//            else if (group != "Group" && day != "Day" && textField.isNotBlank()) {
-//                studentViewModel.filterSubject(group, day, textField) // svi parametri
-//            }
-//            else studentViewModel.getAllSubjects()
         }
     }
 

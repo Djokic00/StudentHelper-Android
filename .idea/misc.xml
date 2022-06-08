@@ -16,6 +16,7 @@
         <entry key="../../../../../layout/compose-model-1654442041695.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/add_note_icon.xml" value="0.3034632034632035" />
         <entry key="app/src/main/res/drawable/archive_icon.xml" value="0.2759259259259259" />
+        <entry key="app/src/main/res/drawable/edit_icon.xml" value="0.3034632034632035" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.3034632034632035" />
         <entry key="app/src/main/res/drawable/ic_baseline_bar_chart_24.xml" value="0.2037037037037037" />
         <entry key="app/src/main/res/drawable/ic_baseline_edit_note_24.xml" value="0.2037037037037037" />
@@ -25,8 +26,9 @@
         <entry key="app/src/main/res/drawable/logout_icon.xml" value="0.306140350877193" />
         <entry key="app/src/main/res/drawable/note_icon.xml" value="0.29254385964912283" />
         <entry key="app/src/main/res/drawable/search_background_style.xml" value="0.30173160173160174" />
+        <entry key="app/src/main/res/drawable/statistics_icon.xml" value="0.3034632034632035" />
         <entry key="app/src/main/res/drawable/title_background_style.xml" value="0.30173160173160174" />
-        <entry key="app/src/main/res/layout/activity_edit.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_edit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_new_note.xml" value="0.25" />
