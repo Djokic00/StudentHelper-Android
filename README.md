@@ -16,8 +16,6 @@ course at Faculty of Computing. The main purpose of the application is to help s
 - Logout - Click the logout icon and you will be redirected to login screen.
 
 
-
-
 ## Technology stack
 
 Technologies used in the project:
