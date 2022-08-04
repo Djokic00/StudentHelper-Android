@@ -29,18 +29,6 @@ abstract class StudentDao {
     @Query("DELETE FROM subjects")
     abstract fun deleteAll()
 
-//    @Query("SELECT * FROM subjects WHERE grupe LIKE  '%' || :group || '%' ")
-//    abstract fun filterByGroup(group: String): Observable<List<SubjectEntity>>
-//
-//    @Query("SELECT * FROM subjects WHERE dan = :day")
-//    abstract fun filterByDay(day: String): Observable<List<SubjectEntity>>
-
-//    @Query("SELECT * FROM subjects WHERE grupe LIKE  '%' || :group || '%'  AND dan = :day")
-//    abstract fun filterByGroupAndDay(group: String, day: String): Observable<List<SubjectEntity>>
-
-//    @Query("SELECT * FROM subjects WHERE predmet LIKE  '%' || :text || '%' OR nastavnik LIKE '%' || :text || '%')
-//    abstract fun filterByText(text: String): Observable<List<SubjectEntity>>
-
     @Query("SELECT * FROM subjects WHERE (grupe LIKE  '%' || :group || '%') AND (dan LIKE  :day || '%' ) AND (predmet LIKE '%' || :text || '%' OR nastavnik LIKE '%' || :text || '%')")
     abstract fun filter(group: String, day: String, text: String): Observable<List<SubjectEntity>>
 
