@@ -13,6 +13,7 @@ course at Faculty of Computing. The main purpose of the application is to help s
 - Main Screen - On the main screen there are 4 icons: schedule, notes, statistics and logout. You can enter either of them just by clicking on the icon.
 - Schedule Screen - List of all lectures containg subject name, professor name, day, groups. You can filter lectures by all parameters (group, day, professor/subject) or with combination of those parameters.
 - Notes Screen - Used for creating, editing, archiving and deleting notes. Additionally, it has a search option and toggle button for archived / non archived notes. It has 4 icons: plus icon for creating a new note, trash icon for deleting, pen icon for editing and arrow down / up for archived / non archived notes.
+- Statistical Screen - Represents the number of notes created in the last 5 days.
 - Logout - Click the logout icon and you will be redirected to login screen.
 
 
@@ -26,3 +27,14 @@ Technologies used in the project:
 - Room library for working with database (ORM)
 - Moshi library for working with json
 - Jetpack Compose for login activity and statistics activity
+
+ ## Pictures
+ 
+ | Main Screen | Schedule | Notes |
+ | - | - | - |
+| <img src="https://github.com/Djokic00/StudentHelper-Android/blob/main/assets/mainScreen.jpeg" width=280> | <img src="https://github.com/Djokic00/StudentHelper-Android/blob/main/assets/schedule.jpeg" width=280> | <img src="https://github.com/Djokic00/StudentHelper-Android/blob/main/assets/notes.jpeg" width=280> |
+
+| Search Notes | New Note | Edit Note |
+ | - | - | - |
+| <img src="https://github.com/Djokic00/StudentHelper-Android/blob/main/assets/searchNote.jpeg" width=280>| <img src="https://github.com/Djokic00/StudentHelper-Android/blob/main/assets/newNote.jpeg" width=280> | <img src="https://github.com/Djokic00/StudentHelper-Android/blob/main/assets/editNote.jpeg" width=280>    |
+
